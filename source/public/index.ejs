@@ -1,0 +1,218 @@
+<html id>
+<!-- Creating a form to get Message (Phrase) and Shift Value(Key) -->
+<link href="styles.css" rel="stylesheet" type="text/css">
+<h1>Code Breakerz</h1>
+
+
+<div id="puzzle-select">
+    <label for="puzzle-selector">Select a puzzle:</label>
+    <br>
+    <select id="puzzle-selector">
+        <option value="c-encode">Caesar Encoder</option>
+        <option value="c-solve">Caesar Solver</option>
+        <option value="base">Base Conversion</option>
+        <option value="font">Font Changer</option>
+    </select>
+</div>
+<script>
+    const selectElement = document.getElementById("puzzle-select");
+
+    selectElement.addEventListener("change", (event) => {
+        const selectedOption = event.target.value;
+
+        // Hide all puzzle sections
+        document.getElementById("puzzle-c-encode").style.display = "none";
+        document.getElementById("puzzle-c-solve").style.display = "none";
+        document.getElementById("puzzle-base").style.display = "none";
+        document.getElementById("font-changer").style.display = "none";
+
+        // Show the selected puzzle section
+        if (selectedOption === "c-encode") {
+            document.getElementById("puzzle-c-encode").style.display = "block";
+            document.getElementById("Solution-Area").style.display = "block";
+        } else if (selectedOption === "c-solve") {
+            document.getElementById("puzzle-c-solve").style.display = "block";
+            document.getElementById("Solution-Area").style.display = "block";
+        } else if (selectedOption === "base") {
+            document.getElementById("puzzle-base").style.display = "block";
+            document.getElementById("Solution-Area").style.display = "none";
+        } else if (selectedOption === "font") {
+            document.getElementById("font-changer").style.display = "block";
+            document.getElementById("Solution-Area").style.display = "none";
+
+        }
+    });
+    selectElement.value = "c-encode"
+
+</script>
+<br>
+
+<!-- CAESAR CIPHER ENCODE-->
+<div id="puzzle-c-encode" action="/" method="post">
+    <div id="Phrase-Box">
+        <label for="Phrase">Phrase to be encoded:</label><br>
+        <!-- First text box for message -->
+        <input type="text" id="Phrase" name="Phrase"><br>
+    </div>
+
+    <div id="Key-Box">
+        <Label for="Key">Shift value:</Label><br>
+        <!-- Second text box for Key value -->
+        <input type="number" min="1" max="25" id="Key" name="Key"><br>
+    </div>
+
+    <!-- Submit button to push answers into program -->
+    <button id="encode-submit-button">ENCODE</button>
+    <script src="/caesar.js"></script> <!--LOADS THE CAESAR CIPHER SCRIPT-->
+    <script>
+        //script allows us to add javascript inside of the HTML 
+        //I learned that because this is a client-side script it should be kept in the HTML file (and its a button it makes sense), while the code was in app.js before
+
+        const submitBtn = document.getElementById("encode-submit-button"); //links with the button I created
+
+        submitBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            const phrase = document.getElementById("Phrase").value; //these get the inputs from the document
+            const key = document.getElementById("Key").value;
+            const solution = caesarsolve(phrase, key);
+
+            document.getElementById("Solution-Text").innerHTML = solution; //This sets the inner HTML of the Solution-Text box to the solution
+        });
+    </script>
+</div>
+
+<!-- CAESAR CIPHER SOLVER-->
+<div id="puzzle-c-solve" style="display:none;" action="/" method="post">
+    <div id="Phrase-Box">
+        <label for="solve-Phrase">Phrase to be decoded:</label><br>
+        <!-- First text box for message -->
+        <input type="text" id="solve-Phrase" name="solve-Phrase"><br>
+    </div>
+
+    <div id="Key-Box">
+        <Label for="solve-Key">Shift value:</Label><br>
+        <!-- Second text box for Key value -->
+        <input type="number" min="1" max="25" id="solve-Key" name="solve-Key"><br>
+    </div>
+
+    <!-- Submit button to push answers into program -->
+    <button id="solve-submit-button">DECODE</button>
+    <script src="/caesar.js"></script> <!--LOADS THE CAESAR CIPHER SCRIPT-->
+    <script>
+        //script allows us to add javascript inside of the HTML
+        //I learned that because this is a client-side script it should be kept in the HTML file (and its a button it makes sense), while the code was in app.js before
+        const solvesubmitBtn = document.getElementById("solve-submit-button")
+
+        solvesubmitBtn.addEventListener("click", (event) => {
+            event.preventDefault();
+            const phrase = document.getElementById("solve-Phrase").value; //these get the inputs from the document
+            const key = document.getElementById("solve-Key").value;
+            const solution = reversecaesarsolve(phrase, key);
+
+            document.getElementById("Solution-Text").innerHTML = solution; //This sets the inner HTML of the Solution-Text box to the solution
+        });
+    </script>
+</div>
+
+<!-- BASE CONVERSION-->
+<div id="puzzle-base" style="display:none;">
+    <h1>Convert a number to binary, hex, or octal</h1>
+    <label for="puzzle-base">Select a base:</label>
+    <br>
+    <select id="puzzle-base-select">
+        <option value="binary">Binary</option>
+        <option value="hex">Hexadecimal</option>
+        <option value="octal">Octal</option>
+    </select>
+    <br>
+    <br>
+    <div id="convnumber-box">
+        <Label for="convnumber-box">Number to change bases</Label><br>
+        <input type="number" min="0" max="10000" id="convnumber" name="convnumber"><br>
+    </div>
+
+    <br>
+    <!-- Submit button to push answers into program -->
+    <button id="convert">CONVERT</button>
+
+    <div id="Base-Solution-Area" style="display:block;" action="/" method="post">
+        <h1>Solution:</h1>
+        <div id="Base-Solution-Box">
+            <p id="Base-Solution-Text"></p> <!--THIS IS WHERE OUR SOLUTION IS-->
+        </div>
+    </div>
+
+
+
+</div>
+<script src="/binary.js"></script>
+<script>
+    //script allows us to add javascript inside of the HTML 
+    //I learned that because this is a client-side script it should be kept in the HTML file (and its a button it makes sense), while the code was in app.js before
+
+    const submitBtn2 = document.getElementById("convert"); //links with the button I created
+
+    submitBtn2.addEventListener("click", (event) => {
+        event.preventDefault();
+        const selectElement = document.getElementById("puzzle-base-select");
+        const selectedValue = selectElement.value;
+        const convertednumber = document.getElementById("convnumber").value;
+        solution = changeBase(selectedValue, convertednumber);
+        document.getElementById("Base-Solution-Text").innerHTML = solution; //This sets the inner HTML of the Solution-Text box to the solution
+    });
+</script>
+
+
+<!-- FONT CHANGER -->
+<div id="font-changer" style="display:none;" action="/" method="post">
+    <h1>Font Changer</h1>
+
+    <div id="font-select" class="font-selector"> <!--Will snag CSS code from other puzzle select earlier-->
+        <label for="font-selector">Select a font</label>
+        <br>
+        <select id="font-selector">
+            <option value="doublestruck">Mathmatical Double-Struck</option>
+            <option value="mathbold">Math Bold</option>
+            <option value="monospace">Monospace</option>
+            <option value="bubble">Circle Font</option>
+            <option value="fraktur">Fraktur</option>
+            <option value="italic">Italics</option>
+        </select>
+    </div>
+    <p>Enter your text here:</p>
+    <textarea id="textarea" name="textarea" cols="50" rows="5"></textarea>
+    <br>
+    <div id="font-output"></div>
+</div>
+
+
+<script src='/fontchanger.js'></script>
+<script>
+    const elementselect = document.querySelector('#font-selector');
+    const fontOutputElement = document.querySelector('#font-output');
+    const textInputElement = document.querySelector('#textarea');
+
+    function updateFontOutput() {
+        const selectedFont = elementselect.value;
+        const textInput = textInputElement.value;
+        const fontOutput = fontchanger(textInput, selectedFont);
+        fontOutputElement.innerHTML = fontOutput;
+    }
+
+    updateFontOutput();
+    textInputElement.addEventListener('input', updateFontOutput);
+    elementselect.addEventListener('change', updateFontOutput);
+</script>
+
+
+
+<br><br>
+<div id="Solution-Area" style="display:block;" action="/" method="post">
+    <h1>Solution:</h1>
+    <div id="Solution-Box">
+        <p id="Solution-Text"></p> <!--THIS IS WHERE OUR SOLUTION IS-->
+    </div>
+</div>
+
+
+</html>

@@ -1,0 +1,81 @@
+body {
+    text-align: center;
+    padding-top: 125px;
+    background-color:lightpink;
+    color:6C3594;
+    
+}
+
+
+#Phrase {
+    text-align: center;
+    font-family: Helvetica, sans-serif;
+    color: 6C3594;
+    background-color: transparent;
+    outline: none;
+    font-size: 30px;
+}
+
+#Phrase-Box,
+#Key-Box {
+    padding-bottom: 15px;
+    font-family: Helvetica,sans-serif;
+    color:E9118F;
+}
+
+#Solution-Box {
+    text-align: center;
+    width: 300px;
+    border: 5px solid darkslateblue;
+    padding: 10px;
+    margin: auto;
+    font-family: Helvetica, sans-serif;
+    background-color:9C78B7;
+    color:aliceblue;
+}
+/*
+#Solution-Box-Base {
+    text-align: center;
+    width: 300px;
+    border: 5px solid darkslateblue;
+    padding: 10px;
+    margin: auto;
+    font-family: Helvetica, sans-serif;
+    background-color:9C78B7;
+    color:aliceblue;
+}
+*/
+#Solution-text{
+   text-align: center;
+   color:aliceblue;
+   font-family: Helvetica,sans-serif;
+   border-color: transparent;
+
+}
+#submit-button{
+    color: aliceblue;
+    font-family: Helvetica;
+    background-color: 9C78B7;
+    border-color: transparent
+
+}
+    #submit-button:hover{
+        transition: background-color 0.5s ease-in-out;
+        background-color:darkgreen;
+    }
+    input {
+    border-color: transparent;
+
+}
+
+#puzzle-select {
+    color:6C3594;
+    border-color: 6C3594;
+    border-radius: 50;
+
+}
+
+#Solution-Box:hover{
+    background-color:E9118F;
+    transition: background-color 0.5s ease-in;
+}
