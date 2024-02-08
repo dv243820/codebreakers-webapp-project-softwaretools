@@ -1,7 +1,5 @@
 # web-app-nodejs
-
-**GitHub Link**
-https://github.com/OU-CS3560/web-app-nodejs
+My first group project for my software tools class sophomore year. I worked mostly on most of the puzzles and the functionality of the website
 
 ## Team Information
 
